@@ -8,7 +8,6 @@ const inputValidation = (video) => {
     const errors = {
         errorsMessages: [],
     };
-    // ...
     if (video.availableResolutions && (!Array.isArray(video.availableResolutions)
         || video.availableResolutions.find(p => !video_types_1.Resolutions[p]))) {
         errors.errorsMessages.push({
@@ -21,10 +20,22 @@ const inputValidation = (video) => {
             field: 'title',
         });
     }
+    else if (video.title.length > 40) {
+        errors.errorsMessages.push({
+            message: 'title max length is 40',
+            field: 'title',
+        });
+    }
     if (!video.author) {
         errors.errorsMessages.push({
             message: 'author is required',
             field: 'author',
+        });
+    }
+    else if (video.author.length > 20) {
+        errors.errorsMessages.push({
+            message: 'title max length is 40',
+            field: 'title',
         });
     }
     return errors;
@@ -37,8 +48,7 @@ const createVideoController = (req, res) => {
             .json(errors);
         return;
     }
-    // если всё ок - добавляем видео
-    const newVideo /*VideoDBType*/ = Object.assign(Object.assign({}, req.body), { id: Date.now() + Math.random() });
+    const newVideo = Object.assign({ id: Date.now() + Math.random(), availableResolutions: [video_types_1.Resolutions.P144], createdAt: new Date().toISOString(), publicationDate: new Date().toISOString(), canBeDownloaded: false, minAgeRestriction: null }, req.body);
     db_1.db.videos = [...db_1.db.videos, newVideo];
     res
         .status(201)
