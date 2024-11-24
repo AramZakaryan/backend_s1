@@ -1,0 +1,42 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateVideoController = void 0;
+const db_1 = require("../db/db");
+const inputValidation = (video) => {
+    const errors = {
+        errorsMessages: [],
+    };
+    if (!video.title) {
+        errors.errorsMessages.push({
+            message: 'title is required',
+            field: 'title',
+        });
+    }
+    if (!video.author) {
+        errors.errorsMessages.push({
+            message: 'author is required',
+            field: 'author',
+        });
+    }
+    return errors;
+};
+const updateVideoController = (req, res) => {
+    const id = +req.params.id;
+    const video = db_1.db.videos.find(video => video.id === id);
+    if (!video) {
+        res.sendStatus(404);
+    }
+    const body = req.body;
+    const errors = inputValidation(body);
+    if (errors.errorsMessages.length) {
+        res
+            .status(400)
+            .json(errors);
+        return;
+    }
+    const updatedVideo /*VideoDBType*/ = Object.assign(Object.assign({}, video), body);
+    db_1.db.videos = db_1.db.videos.map(video => video.id === id && updatedVideo);
+    res
+        .sendStatus(204);
+};
+exports.updateVideoController = updateVideoController;

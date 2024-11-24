@@ -1,0 +1,57 @@
+import { Request, Response } from 'express';
+import { db } from '../db/db';
+import { BodyType, OutputType, ParamType } from './some';
+import { InputVideoType } from '../input-output-types/video-types';
+import { OutputErrorsType } from '../input-output-types/input-output-types';
+
+const inputValidation = (video: InputVideoType) => {
+  const errors: OutputErrorsType = { // объект для сбора ошибок
+    errorsMessages: [],
+  };
+
+  if (!video.title) {
+    errors.errorsMessages.push({
+      message: 'title is required',
+      field: 'title',
+    });
+  }
+
+  if (!video.author) {
+    errors.errorsMessages.push({
+      message: 'author is required',
+      field: 'author',
+    });
+  }
+
+  return errors;
+};
+
+
+export const updateVideoController = (req: Request<ParamType, OutputType, BodyType>, res: Response<any /*OutputVideoType[]*/>) => {
+
+  const id = +req.params.id;
+  const video = db.videos.find(video => video.id === id);
+
+  if (!video) {
+    res.sendStatus(404);
+  }
+
+  const body = req.body;
+  const errors = inputValidation(body);
+  if (errors.errorsMessages.length) {
+    res
+      .status(400)
+      .json(errors);
+    return;
+  }
+
+  const updatedVideo: any /*VideoDBType*/ = {
+    ...video,
+    ...body,
+  };
+
+  db.videos = db.videos.map(video => video.id === id && updatedVideo);
+
+  res
+    .sendStatus(204);
+};

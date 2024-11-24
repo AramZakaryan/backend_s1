@@ -2,11 +2,9 @@ import {Request, Response} from 'express'
 import {db} from '../db/db'
 
 export const getVideosController = (req: Request, res: Response<any /*OutputVideoType[]*/>) => {
-    const videos = db.videos // получаем видео из базы данных
+    const videos = db.videos
 
     res
         .status(200)
-        .json(videos) // отдаём видео в качестве ответа
+        .json(videos)
 }
-
-// не забудьте добавить эндпоинт в апп

@@ -1,6 +1,6 @@
 // import {VideoDBType} from './video-db-type'
 
-export type DBType = { // типизация базы данных (что мы будем в ней хранить)
+export type DBType = {
     videos: any[] // VideoDBType[]
     // some: any[]
 }

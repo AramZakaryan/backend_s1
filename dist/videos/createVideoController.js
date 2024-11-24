@@ -6,13 +6,13 @@ const db_1 = require("../db/db");
 const video_types_1 = require("../input-output-types/video-types");
 const inputValidation = (video) => {
     const errors = {
-        errorsMessages: []
+        errorsMessages: [],
     };
     // ...
-    if (!Array.isArray(video.availableResolution)
-        || video.availableResolution.find(p => !video_types_1.Resolutions[p])) {
+    if (video.availableResolutions && (!Array.isArray(video.availableResolutions)
+        || video.availableResolutions.find(p => !video_types_1.Resolutions[p]))) {
         errors.errorsMessages.push({
-            message: 'error!!!!', field: 'availableResolution'
+            message: 'error!!!!', field: 'availableResolutions',
         });
     }
     return errors;
