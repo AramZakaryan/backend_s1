@@ -12,11 +12,26 @@ const inputValidation = (video) => {
             field: 'title',
         });
     }
+    else if (video.title.length > 40) {
+        errors.errorsMessages.push({
+            message: 'title max length is 40',
+            field: 'title',
+        });
+    }
     if (!video.author) {
         errors.errorsMessages.push({
             message: 'author is required',
             field: 'author',
         });
+    }
+    else if (video.author.length > 20) {
+        errors.errorsMessages.push({
+            message: 'author max length is 40',
+            field: 'author',
+        });
+    }
+    if (video.canBeDownloaded && typeof video.canBeDownloaded !== 'boolean') {
+        console.log('vay');
     }
     return errors;
 };

@@ -38,8 +38,8 @@ const inputValidation = (video: InputVideoType) => {
       });
     } else if (video.author.length > 20) {
       errors.errorsMessages.push({
-        message: 'title max length is 40',
-        field: 'title',
+        message: 'author max length is 40',
+        field: 'author',
       });
     }
 
