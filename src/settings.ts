@@ -1,11 +1,12 @@
-import {config} from 'dotenv'
+import { config } from 'dotenv';
 
-config() // добавление переменных из файла .env в process.env
+config(); // добавление переменных из файла .env в process.env
 
 export const SETTINGS = {
-    // все хардкодные значения должны быть здесь, для удобства их изменения
-    PORT: process.env.PORT || 3004,
-    PATH: {
-        VIDEOS: '/videos',
-    },
-}
+  // все хардкодные значения должны быть здесь, для удобства их изменения
+  PORT: process.env.PORT || 3004,
+  PATH: {
+    VIDEOS: '/videos',
+    TESTING: '/testing/all-data',
+  },
+};

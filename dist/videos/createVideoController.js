@@ -15,6 +15,18 @@ const inputValidation = (video) => {
             message: 'error!!!!', field: 'availableResolutions',
         });
     }
+    if (!video.title) {
+        errors.errorsMessages.push({
+            message: 'title is required',
+            field: 'title',
+        });
+    }
+    if (!video.author) {
+        errors.errorsMessages.push({
+            message: 'author is required',
+            field: 'author',
+        });
+    }
     return errors;
 };
 const createVideoController = (req, res) => {

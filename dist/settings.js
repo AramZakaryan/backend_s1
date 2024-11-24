@@ -8,5 +8,6 @@ exports.SETTINGS = {
     PORT: process.env.PORT || 3004,
     PATH: {
         VIDEOS: '/videos',
+        TESTING: '/testing/all-data',
     },
 };

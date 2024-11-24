@@ -1,13 +1,15 @@
-import express from 'express'
-import cors from 'cors'
-import {SETTINGS} from "./settings";
-import {videosRouter} from "./videos";
+import express from 'express';
+import cors from 'cors';
+import { SETTINGS } from './settings';
+import { videosRouter } from './videos';
+import { testingRouter } from './testing';
 
-export const app = express()
-app.use(express.json())
-app.use(cors())
+export const app = express();
+app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
-    res.status(200).json({version: '1.0'})
-})
-app.use(SETTINGS.PATH.VIDEOS, videosRouter)
+  res.status(200).json({ version: '1.0' });
+});
+app.use(SETTINGS.PATH.VIDEOS, videosRouter);
+app.use(SETTINGS.PATH.TESTING, testingRouter);
