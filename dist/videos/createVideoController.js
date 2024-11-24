@@ -50,8 +50,7 @@ const createVideoController = (req, res) => {
     }
     const now = new Date();
     now.setTime(now.getTime()
-    // + 2 * 24 * 60 * 60 * 1000
-    );
+        + 2 * 24 * 60 * 60 * 1000);
     const nextDayDate = now.toISOString();
     const newVideo = Object.assign({ id: Date.now() + Math.random(), availableResolutions: [video_types_1.Resolutions.P144], createdAt: nextDayDate, publicationDate: nextDayDate, canBeDownloaded: false, minAgeRestriction: null }, req.body);
     db_1.db.videos = [...db_1.db.videos, newVideo];
