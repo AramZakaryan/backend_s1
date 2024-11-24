@@ -31,7 +31,10 @@ const inputValidation = (video) => {
         });
     }
     if (video.canBeDownloaded && typeof video.canBeDownloaded !== 'boolean') {
-        console.log('vay');
+        errors.errorsMessages.push({
+            message: 'canBeDownloaded should be boolean',
+            field: 'canBeDownloaded',
+        });
     }
     return errors;
 };
