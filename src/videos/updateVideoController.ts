@@ -47,6 +47,13 @@ const inputValidation = (video: InputVideoType) => {
     });
   }
 
+  if (video.publicationDate && typeof video.publicationDate !== 'string') {
+    errors.errorsMessages.push({
+      message: 'publicationDate should be string',
+      field: 'publicationDate',
+    });
+  }
+
   return errors;
 };
 

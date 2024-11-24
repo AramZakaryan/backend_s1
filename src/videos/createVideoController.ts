@@ -57,8 +57,8 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
   }
 
   const now = new Date();
-  now.setTime(now.getTime() + 24 * 60 * 60 * 1000)
-  const nextDayDate = now.toISOString()
+  now.setTime(now.getTime() + 2 * 24 * 60 * 60 * 1000);
+  const nextDayDate = now.toISOString();
 
 
   const newVideo: VideoDBType = {
