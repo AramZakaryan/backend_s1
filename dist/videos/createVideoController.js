@@ -48,7 +48,10 @@ const createVideoController = (req, res) => {
             .json(errors);
         return;
     }
-    const newVideo = Object.assign({ id: Date.now() + Math.random(), availableResolutions: [video_types_1.Resolutions.P144], createdAt: new Date().toISOString(), publicationDate: new Date().toISOString(), canBeDownloaded: false, minAgeRestriction: null }, req.body);
+    const now = new Date();
+    now.setTime(now.getTime() + 24 * 60 * 60 * 1000);
+    const nextDayDate = now.toISOString();
+    const newVideo = Object.assign({ id: Date.now() + Math.random(), availableResolutions: [video_types_1.Resolutions.P144], createdAt: nextDayDate, publicationDate: nextDayDate, canBeDownloaded: false, minAgeRestriction: null }, req.body);
     db_1.db.videos = [...db_1.db.videos, newVideo];
     res
         .status(201)

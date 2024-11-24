@@ -36,6 +36,12 @@ const inputValidation = (video) => {
             field: 'canBeDownloaded',
         });
     }
+    if (video.minAgeRestriction && !(video.minAgeRestriction <= 18 && video.minAgeRestriction >= 1)) {
+        errors.errorsMessages.push({
+            message: 'minAgeRestriction should from 1 to 18',
+            field: 'minAgeRestriction',
+        });
+    }
     return errors;
 };
 const updateVideoController = (req, res) => {

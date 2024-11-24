@@ -56,12 +56,17 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
     return;
   }
 
+  const now = new Date();
+  now.setTime(now.getTime() + 24 * 60 * 60 * 1000)
+  const nextDayDate = now.toISOString()
+
+
   const newVideo: VideoDBType = {
 
     id: Date.now() + Math.random(),
     availableResolutions: [Resolutions.P144],
-    createdAt: new Date().toISOString(),
-    publicationDate: new Date().toISOString(),
+    createdAt: nextDayDate,
+    publicationDate: nextDayDate,
     canBeDownloaded: false,
     minAgeRestriction: null,
     ...req.body,
