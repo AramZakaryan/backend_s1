@@ -57,9 +57,8 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
   }
 
   const now = new Date();
-  now.setTime(now.getTime()
-    + 2 * 24 * 60 * 60 * 1000
-  );
+  const createdAtDate = now.toISOString();
+  now.setDate(now.getDate() + 1);
   const nextDayDate = now.toISOString();
 
 
@@ -67,7 +66,7 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
 
     id: Date.now() + Math.random(),
     availableResolutions: [Resolutions.P144],
-    createdAt: nextDayDate,
+    createdAt: createdAtDate,
     publicationDate: nextDayDate,
     canBeDownloaded: false,
     minAgeRestriction: null,

@@ -49,10 +49,10 @@ const createVideoController = (req, res) => {
         return;
     }
     const now = new Date();
-    now.setTime(now.getTime()
-        + 2 * 24 * 60 * 60 * 1000);
+    const createdAtDate = now.toISOString();
+    now.setDate(now.getDate() + 1);
     const nextDayDate = now.toISOString();
-    const newVideo = Object.assign({ id: Date.now() + Math.random(), availableResolutions: [video_types_1.Resolutions.P144], createdAt: nextDayDate, publicationDate: nextDayDate, canBeDownloaded: false, minAgeRestriction: null }, req.body);
+    const newVideo = Object.assign({ id: Date.now() + Math.random(), availableResolutions: [video_types_1.Resolutions.P144], createdAt: createdAtDate, publicationDate: nextDayDate, canBeDownloaded: false, minAgeRestriction: null }, req.body);
     db_1.db.videos = [...db_1.db.videos, newVideo];
     res
         .status(201)
